@@ -1,13 +1,13 @@
 import ProfilePage from './ProfilePage';
-import UserContext from './UserContext'; // Import the context you created
+import UserContext from './UserContext'; // Make sure this path is correct
 
 function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
-    /* Wrap ProfilePage and provide the 'userData' as the value */
+    // You must use .Provider and pass the 'value' prop
     <UserContext.Provider value={userData}>
-      <ProfilePage /> 
+      <ProfilePage />
     </UserContext.Provider>
   );
 }
