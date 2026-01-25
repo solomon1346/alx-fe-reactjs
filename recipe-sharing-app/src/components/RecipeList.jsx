@@ -5,15 +5,24 @@ const RecipeList = () => {
 
   return (
     <div>
-      {recipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      <h2>Recipe List</h2>
+      {recipes.length === 0 ? (
+        <p>No recipes yet. Add your first recipe!</p>
+      ) : (
+        recipes.map((recipe) => (
+          <div key={recipe.id} style={{ 
+            border: '1px solid #ddd', 
+            padding: '10px', 
+            marginBottom: '10px',
+            borderRadius: '5px'
+          }}>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+          </div>
+        ))
+      )}
     </div>
   );
 };
 
 export default RecipeList;
-``
