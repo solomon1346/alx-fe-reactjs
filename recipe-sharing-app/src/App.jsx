@@ -4,11 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App" style={{ 
-      maxWidth: '800px', 
-      margin: '0 auto', 
-      padding: '20px' 
-    }}>
+    <div className="App">
       <h1>Recipe Sharing Application</h1>
       <AddRecipeForm />
       <RecipeList />
