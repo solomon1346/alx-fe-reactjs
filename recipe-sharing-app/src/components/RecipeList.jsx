@@ -7,13 +7,12 @@ const RecipeList = () => {
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
   const searchTerm = useRecipeStore((state) => state.searchTerm);
   const filterRecipes = useRecipeStore((state) => state.filterRecipes);
+  const favorites = useRecipeStore((state) => state.favorites);
 
-  
   useEffect(() => {
     filterRecipes();
   }, [recipes, filterRecipes]);
 
- 
   const recipesToDisplay = searchTerm ? filteredRecipes : recipes;
 
   return (
@@ -26,6 +25,7 @@ const RecipeList = () => {
           <div key={recipe.id}>
             <h3>
               <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+              {favorites.includes(recipe.id) && <span> ⭐</span>}
             </h3>
             <p>{recipe.description}</p>
           </div>
