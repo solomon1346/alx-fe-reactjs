@@ -7,7 +7,7 @@ function UserProfile() {
         className="rounded-full w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mx-auto hover:scale-110 transition-transform duration-300 ease-in-out"
       />
       <h1 className="text-lg sm:text-xl md:text-xl text-blue-800 hover:text-blue-500 my-4 text-center transition-colors duration-300 ease-in-out">
-        John Doe
+        AMOAH SOLOMON
       </h1>
       <p className="text-gray-600 text-sm sm:text-base md:text-base text-center">
         Developer at Example Co. Loves to write code and explore new technologies.
