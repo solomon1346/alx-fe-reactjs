@@ -9,7 +9,7 @@ function AddRecipeForm() {
 
   const navigate = useNavigate();
 
-  // VALIDATE FUNCTION (Checker requires this word)
+  /
   const validate = () => {
     let newErrors = {};
 
