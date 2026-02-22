@@ -4,79 +4,47 @@ function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let newErrors = {};
-
-    if (!username.trim()) {
-      newErrors.username = "Username is required";
+    if (!username || !email || !password) {
+      setError("All fields are required");
+      return;
     }
 
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    }
-
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    }
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      console.log({
-        username,
-        email,
-        password,
-      });
-
-      // Reset form
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    }
+    setError("");
+    alert("Registration successful!");
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "40px auto" }}>
-      <h2>User Registration (Controlled)</h2>
+    <form onSubmit={handleSubmit}>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label><br />
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
-        </div>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-        <div>
-          <label>Email</label><br />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-        </div>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <div>
-          <label>Password</label><br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        </div>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <button type="submit">Register</button>
-      </form>
-    </div>
+      <button type="submit">Register</button>
+    </form>
   );
 }
 
