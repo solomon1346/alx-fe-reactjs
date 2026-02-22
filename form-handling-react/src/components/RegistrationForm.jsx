@@ -1,44 +1,83 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const RegistrationForm = () => {
-  // The checker wants these specific variable names
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function RegistrationForm() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Basic validation logic
-    if (!username || !email || !password) {
-      alert("All fields are required!");
-      return;
+
+    let newErrors = {};
+
+    if (!username.trim()) {
+      newErrors.username = "Username is required";
     }
-    console.log("Form Submitted:", { username, email, password });
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log({
+        username,
+        email,
+        password,
+      });
+
+      // Reset form
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
-        name="username" 
-        value={username} // Matches checker requirement
-        onChange={(e) => setUsername(e.target.value)} 
-      />
-      <input 
-        type="email" 
-        name="email" 
-        value={email} // Matches checker requirement
-      onChange={(e) => setEmail(e.target.value)} 
-      />
-      <input 
-        type="password" 
-        name="password" 
-        value={password} // Matches checker requirement
-        onChange={(e) => setPassword(e.target.value)} 
-      />
-      <button type="submit">Register</button>
-    </form>
+    <div style={{ maxWidth: "400px", margin: "40px auto" }}>
+      <h2>User Registration (Controlled)</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username</label><br />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+        </div>
+
+        <div>
+          <label>Email</label><br />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        </div>
+
+        <div>
+          <label>Password</label><br />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
-};
+}
 
 export default RegistrationForm;
