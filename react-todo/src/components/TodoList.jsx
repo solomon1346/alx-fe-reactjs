@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 
-const TodoList = () => {
+function TodoList() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Write Tests", completed: false },
-    { id: 3, text: "Build Projects", completed: false },
   ]);
 
-  const [newTodo, setNewTodo] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
-  const addTodo = (e) => {
+  const handleAddTodo = (e) => {
     e.preventDefault();
-    if (newTodo.trim() === "") return;
+    if (!inputValue.trim()) return;
 
-    const todo = {
+    const newTodo = {
       id: Date.now(),
-      text: newTodo,
+      text: inputValue,
       completed: false,
     };
 
-    setTodos([...todos, todo]);
-    setNewTodo("");
+    setTodos([...todos, newTodo]);
+    setInputValue("");
   };
 
-  const toggleTodo = (id) => {
+  const handleToggle = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id
@@ -33,7 +32,7 @@ const TodoList = () => {
     );
   };
 
-  const deleteTodo = (id) => {
+  const handleDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -41,12 +40,12 @@ const TodoList = () => {
     <div>
       <h1>Todo List</h1>
 
-      <form onSubmit={addTodo}>
+      <form onSubmit={handleAddTodo}>
         <input
           type="text"
-          placeholder="Add new todo"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
+          placeholder="Add a new todo"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <button type="submit">Add</button>
       </form>
@@ -55,16 +54,14 @@ const TodoList = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span
-              onClick={() => toggleTodo(todo.id)}
+              onClick={() => handleToggle(todo.id)}
               style={{
                 textDecoration: todo.completed ? "line-through" : "none",
-                cursor: "pointer",
               }}
             >
               {todo.text}
             </span>
-
-            <button onClick={() => deleteTodo(todo.id)}>
+            <button onClick={() => handleDelete(todo.id)}>
               Delete
             </button>
           </li>
@@ -72,6 +69,6 @@ const TodoList = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default TodoList;
