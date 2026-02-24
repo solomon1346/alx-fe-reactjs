@@ -10,7 +10,7 @@ function TodoList() {
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (inputValue.trim() === "") return;
 
     const newTodo = {
       id: Date.now(),
@@ -57,10 +57,12 @@ function TodoList() {
               onClick={() => handleToggle(todo.id)}
               style={{
                 textDecoration: todo.completed ? "line-through" : "none",
+                cursor: "pointer",
               }}
             >
               {todo.text}
             </span>
+
             <button onClick={() => handleDelete(todo.id)}>
               Delete
             </button>
